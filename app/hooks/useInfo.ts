@@ -15,7 +15,7 @@ export const useData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/data"); // Assuming the API route is at /api/data
+        const response = await fetch("/api/data",{method: 'POST'}); // Assuming the API route is at /api/data
         const result = await response.json();
 
         if (response.ok) {
@@ -23,7 +23,7 @@ export const useData = () => {
         } else {
           console.error("Error fetching data:", result.error);
         }
-      } catch (error:any) {
+      } catch (error: any) {
         console.error("Error fetching data:", error.message);
       }
     };

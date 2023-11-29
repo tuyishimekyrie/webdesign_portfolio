@@ -26,7 +26,7 @@ interface Props {
 
 const DashBoard: React.FC<Props> = ({ infos }) => (
   <Card>
-    <Title>Dashboard</Title>
+    <Title></Title>
     <Table className="mt-5">
       <TableHead>
         <TableRow>

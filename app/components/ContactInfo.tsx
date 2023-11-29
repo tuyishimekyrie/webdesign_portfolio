@@ -1,16 +1,44 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 interface IFormInput {
   services: string;
-  budgets: number;
+  budget: number;
   pages: number;
   message: string;
   email: string;
 }
 const ContactInfo = () => {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const [info, setInfo] = useState<IFormInput>();
+  const { register, handleSubmit, reset } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    try {
+      // Send data to the Next.js API endpoint
+      const response = await fetch("/api/data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        // Handle success, if needed
+        console.log("Data sent successfully");
+      } else {
+        // Handle error
+        console.error("Error sending data:", response.statusText);
+      }
+    } catch (error:any) {
+      // Handle any network or other errors
+      console.error("Error sending data:", error.message);
+    }
+
+    // Reset the form after submitting
+    setInfo(data);
+    reset();
+  };
+  console.log(info);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-4">
@@ -33,7 +61,7 @@ const ContactInfo = () => {
           <label>What is your budget for this project?</label>
           <select
             className="outline-none text-slate-900 mt-2 p-0 sm:p-2 w-[12rem] sm:w-[20rem]"
-            {...register("budgets")}
+            {...register("budget")}
           >
             <option>Choose</option>
             <option value="150000">150_000 Rwf</option>
@@ -69,7 +97,7 @@ const ContactInfo = () => {
           <label>How can we contact you again ?</label>
           <input
             type="email"
-            className="w-[15rem] sm:w-[21rem] mt-2 placeholder:text-slate-900 p-2 outline-none border-none"
+            className="w-[15rem] sm:w-[21rem] mt-2 placeholder:text-slate-900 text-slate-800 p-2 outline-none border-none"
             placeholder="Email"
             {...register("email")}
           />
