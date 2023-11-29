@@ -21,6 +21,7 @@ interface Props {
     pages: number;
     message: string;
     email: string;
+    createdAt: string;
   }[];
 }
 
@@ -36,12 +37,13 @@ const DashBoard: React.FC<Props> = ({ infos }) => (
           <TableHeaderCell>Pages</TableHeaderCell>
           <TableHeaderCell>Message</TableHeaderCell>
           <TableHeaderCell>Email</TableHeaderCell>
+          <TableHeaderCell>CreatedAt</TableHeaderCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {infos.map((item) => (
-          <TableRow key={item.id} className="border-2 border-slate-700">
-            <TableCell className="text-sm">{item.id}</TableCell>
+          <TableRow key={item.id} className="border-y-2 border-slate-700 ">
+            <TableCell className="text-sm py-2">{item.id}</TableCell>
             <TableCell>
               <Text className="text-sm">{item.services}</Text>
             </TableCell>
@@ -56,6 +58,11 @@ const DashBoard: React.FC<Props> = ({ infos }) => (
             </TableCell>
             <TableCell>
               <Text className="text-sm">{item.email}</Text>
+            </TableCell>
+            <TableCell>
+              <Text className="text-sm">
+                {new Date(item.createdAt).toLocaleString("en-US")}
+              </Text>
             </TableCell>
           </TableRow>
         ))}

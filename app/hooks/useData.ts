@@ -7,6 +7,7 @@ interface Props {
   pages: number;
   message: string;
   email: string;
+  createdAt: string;
 }
 
 export const useData = () => {

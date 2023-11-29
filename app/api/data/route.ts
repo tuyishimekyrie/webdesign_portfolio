@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    const data = await prisma.information.findMany();
+    const data = await prisma.information.findMany({
+      orderBy: { id: "desc" },
+    });
     return NextResponse.json(data, { status: 200 });
   } catch (error: any) {
     console.error("Error fetching data:", error.message);
@@ -36,4 +38,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
