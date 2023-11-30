@@ -42,7 +42,7 @@ const DashBoard: React.FC<Props> = ({ infos }) => (
       </TableHead>
       <TableBody>
         {infos.map((item) => (
-          <TableRow key={item.id} className="border-y-2 border-slate-700 ">
+          <TableRow key={item.id} className="border-y-2 border-slate-700 hover:bg-blue-900 hover:cursor-pointer ">
             <TableCell className="text-sm py-2">{item.id}</TableCell>
             <TableCell>
               <Text className="text-sm">{item.services}</Text>

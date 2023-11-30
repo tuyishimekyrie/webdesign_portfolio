@@ -16,7 +16,7 @@ const Button = () => {
   return (
     <div>
       <button
-        className="bg-blue-600 px-6 py-2 rounded-full hover:bg-blue-900"
+        className='className="bg-blue-600 px-6 py-2 rounded-full hover:bg-blue-900'
         onClick={handleSignOut}
       >
         signout
